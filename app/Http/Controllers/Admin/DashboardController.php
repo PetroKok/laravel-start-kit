@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        1 == 1 ? 1 :0;
         return view('admin::home');
     }
 
