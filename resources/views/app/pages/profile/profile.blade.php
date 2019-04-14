@@ -1,4 +1,4 @@
-@extends('app.layouts.app')
+@extends('app.layouts.profile')
 
 @push('scripts')
     <script type="text/javascript" src="{{asset('js/pages/profile.js')}}"></script>

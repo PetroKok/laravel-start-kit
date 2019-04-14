@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -20,6 +21,12 @@ class VerificationController extends Controller
 
     use VerifiesEmails;
 
+    public function show(Request $request)
+    {
+        return $request->user()->hasVerifiedEmail()
+            ? redirect($this->redirectPath())
+            : view('app.auth.verify');
+    }
     /**
      * Where to redirect users after verification.
      *
