@@ -65703,16 +65703,13 @@ function (_Component) {
   _createClass(App, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/user').then(function (data) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/user').then(function (data) {
         return console.log(data);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var pathname = window.location.pathname;
-      pathname = pathname === '/' ? '' : pathname;
-      console.log(pathname);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -65724,15 +65721,19 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: pathname + '/home'
+        to: '/profile'
+      }, "Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: '/profile/home'
       }, "home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: pathname + '/about'
+        to: '/profile/about'
       }, "about")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: pathname + '/company'
+        to: '/profile/company'
       }, "about/company/:id")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/profile",
         exact: true,
@@ -65793,19 +65794,15 @@ function (_Component) {
   _inherits(Home, _Component);
 
   function Home(props) {
-    var _this;
-
     _classCallCheck(this, Home);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
-    console.log(props.match);
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
   }
 
   _createClass(Home, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.match.params.id);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.match.params.id, "123");
     }
   }]);
 

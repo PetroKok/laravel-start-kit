@@ -4,13 +4,13 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props.match);
     }
 
     render() {
         return (
             <div>
                 {this.props.match.params.id}
+                123
             </div>
         );
     }

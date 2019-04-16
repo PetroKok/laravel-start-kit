@@ -13,23 +13,21 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        axios.post('api/user')
+        axios.post('/api/user')
             .then(data => console.log(data));
     }
 
     render() {
-        let {pathname} = window.location;
-        pathname = pathname === '/' ? '' : pathname;
-        console.log(pathname);
         return (
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
                             <BrowserRouter>
-                                <div className="card-header"><Link to={pathname+'/home'}>home</Link></div>
-                                <div className="card-header"><Link to={pathname+'/about'}>about</Link></div>
-                                <div className="card-header"><Link to={pathname+'/company'}>about/company/:id</Link></div>
+                                <div className="card-header"><Link to={'/profile'}>Profile</Link></div>
+                                <div className="card-header"><Link to={'/profile/home'}>home</Link></div>
+                                <div className="card-header"><Link to={'/profile/about'}>about</Link></div>
+                                <div className="card-header"><Link to={'/profile/company'}>about/company/:id</Link></div>
 
                                 <Route path="/profile" exact component={Profile} />
                                 <Route path="/profile/:id" exact component={Home} />
