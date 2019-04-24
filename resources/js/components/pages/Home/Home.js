@@ -4,13 +4,12 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props.match);
     }
 
     render() {
         return (
             <div>
-                This is the main page of profile!!
+                This is the main page of HOME
             </div>
         );
     }

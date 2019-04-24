@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import axios from 'axios'
-
-import Home from './Home'
-import Profile from './Profile'
+import Routes from './pages/routes'
 
 export default class App extends Component {
 
@@ -13,29 +11,16 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        axios.post('/api/user')
-            .then(data => console.log(data));
+        // axios.post('/api/user')
+        //     .then(data => console.log(data));
     }
 
     render() {
         return (
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
-                            <BrowserRouter>
-                                <div className="card-header"><Link to={'/profile'}>Profile</Link></div>
-                                <div className="card-header"><Link to={'/profile/home'}>home</Link></div>
-                                <div className="card-header"><Link to={'/profile/about'}>about</Link></div>
-                                <div className="card-header"><Link to={'/profile/company'}>about/company/:id</Link></div>
-
-                                <Route path="/profile" exact component={Profile} />
-                                <Route path="/profile/:id" exact component={Home} />
-                            </BrowserRouter>
-
-                        </div>
-                    </div>
-                </div>
+            <div className="container-fluid">
+                <BrowserRouter>
+                    <Routes/>
+                </BrowserRouter>
             </div>
         );
     }
