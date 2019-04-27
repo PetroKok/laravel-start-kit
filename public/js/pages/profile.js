@@ -65738,6 +65738,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/components/pages/Auth/Login.js");
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Register */ "./resources/js/components/pages/Auth/Register.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65761,6 +65763,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Auth =
 /*#__PURE__*/
 function (_Component) {
@@ -65773,16 +65776,39 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Auth).call(this, props));
     _this.state = {};
-    _this.onSubmitForm = _this.onSubmitForm.bind(_assertThisInitialized(_this));
+    _this.onSubmitFormLogin = _this.onSubmitFormLogin.bind(_assertThisInitialized(_this));
+    _this.onSubmitFormRegister = _this.onSubmitFormRegister.bind(_assertThisInitialized(_this));
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('http://urspace.qw/api/logout').then(function (res) {
+      return console.log(res);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
     return _this;
   }
 
   _createClass(Auth, [{
-    key: "onSubmitForm",
-    value: function onSubmitForm(e) {
+    key: "onSubmitFormLogin",
+    value: function onSubmitFormLogin(e) {
       e.preventDefault();
       var formData = new FormData(e.target);
-      console.log(formData);
+      console.log('login');
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/login', formData).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return alert(err);
+      });
+    }
+  }, {
+    key: "onSubmitFormRegister",
+    value: function onSubmitFormRegister(e) {
+      e.preventDefault();
+      var formData = new FormData(e.target);
+      console.log('register');
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/register', formData).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return alert(err);
+      });
     }
   }, {
     key: "render",
@@ -65797,14 +65823,14 @@ function (_Component) {
         path: "/login",
         render: function render() {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            onSubmitForm: _this2.onSubmitForm
+            onSubmitForm: _this2.onSubmitFormLogin
           });
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/register",
         render: function render() {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Register__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            onSubmitForm: _this2.onSubmitForm
+            onSubmitForm: _this2.onSubmitFormRegister
           });
         }
       }));
@@ -65952,8 +65978,8 @@ function (_Component) {
         id: "password"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
-        name: "password_confirm",
-        id: "password_confirm"
+        name: "password_confirmation",
+        id: "password_confirmation"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Login"

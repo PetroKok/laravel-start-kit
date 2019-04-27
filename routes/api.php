@@ -15,9 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth'], function() {
-    Route::post('/user', function (Request $request) {
-        return Auth::user();
-    });
-});
+Route::group(['middleware' => ['json.response']], function () {
 
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    // public routes
+    Route::post('/user/login', 'vController@login')->name('login.api');
+    Route::post('/user/register', 'UserController@register')->name('register.api');
+
+    // private routes
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/user/logout', 'UserController@logout')->name('logout');
+    });
+
+});
