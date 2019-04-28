@@ -9,6 +9,7 @@ class Home extends Component {
         this.state = {
             user: []
         };
+
         console.log(props);
     }
 
