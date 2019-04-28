@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
+import axios from '../../common/axois'
 
 class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            user: []
+        };
         console.log(props);
+    }
+
+    async componentDidMount() {
+        await axios().get('/api/user')
+            .then(res => this.setState({user: res}))
+        console.log(this.state.user.data)
     }
 
     render() {
         return (
             <div>
-                asdasd
-
-               <Switch>
-                   <Route path="/profile/about" component={() => {return(' this is about')}}/>
-                   <Route path="/profile/me" component={() => {return(' this is me')}}/>
-               </Switch>
-
+                12
             </div>
         );
     }

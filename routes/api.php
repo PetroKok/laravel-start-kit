@@ -22,7 +22,7 @@ Route::group(['middleware' => ['json.response']], function () {
     });
 
     // public routes
-    Route::post('/user/login', 'vController@login')->name('login.api');
+    Route::post('/user/login', 'UserController@login')->name('login.api');
     Route::post('/user/register', 'UserController@register')->name('register.api');
 
     // private routes

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom'
 import Login from "./Login";
 import Register from "./Register";
-import axios from 'axios'
+import {AuthRoute} from "../../common/AuthRoute";
+import urls from "../../helpers/urls";
 
 export default class Auth extends Component{
 
@@ -13,10 +14,6 @@ export default class Auth extends Component{
         };
         this.onSubmitFormLogin = this.onSubmitFormLogin.bind(this);
         this.onSubmitFormRegister = this.onSubmitFormRegister.bind(this);
-
-        axios.post('http://urspace.qw/api/logout')
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
     }
 
     onSubmitFormLogin(e){
@@ -27,7 +24,16 @@ export default class Auth extends Component{
         console.log('login');
 
         axios.post('/api/user/login', formData)
-            .then(res => console.log(res))
+            .then(res => {
+
+                localStorage.setItem('token', res.data.token);
+
+                localStorage.setItem('user', res.data.user);
+
+                window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
+
+                window.location = urls.PROFILE;
+            })
             .catch(err => alert(err));
     }
 
@@ -49,8 +55,8 @@ export default class Auth extends Component{
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
 
-                <Route path='/login' render={() => <Login onSubmitForm={this.onSubmitFormLogin} />}/>
-                <Route path='/register' render={() => <Register onSubmitForm={this.onSubmitFormRegister}/>}/>
+                <AuthRoute path='/login' render={() => <Login onSubmitForm={this.onSubmitFormLogin} />}/>
+                <AuthRoute path='/register' render={() => <Register onSubmitForm={this.onSubmitFormRegister}/>}/>
             </div>
         );
     }
