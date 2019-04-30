@@ -17,11 +17,9 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <BrowserRouter>
-                    <Routes/>
-                </BrowserRouter>
-            </div>
+            <BrowserRouter>
+                <Routes/>
+            </BrowserRouter>
         );
     }
 }

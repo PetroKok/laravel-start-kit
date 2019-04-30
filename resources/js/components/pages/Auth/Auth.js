@@ -3,14 +3,15 @@ import {Route, Link} from 'react-router-dom'
 import Login from "./Login";
 import Register from "./Register";
 import {AuthRoute} from "../../common/AuthRoute";
-import urls from "../../helpers/urls";
+import api from "../../helpers/api_urls";
+import routes from "../../helpers/routes_urls";
 
 export default class Auth extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-
+            processing: false
         };
         this.onSubmitFormLogin = this.onSubmitFormLogin.bind(this);
         this.onSubmitFormRegister = this.onSubmitFormRegister.bind(this);
@@ -19,11 +20,13 @@ export default class Auth extends Component{
     onSubmitFormLogin(e){
         e.preventDefault();
 
+        this.setState({processing: true});
+
         let formData = new FormData(e.target);
 
         console.log('login');
 
-        axios.post('/api/user/login', formData)
+        axios.post(api.LOGIN, formData)
             .then(res => {
 
                 localStorage.setItem('token', res.data.token);
@@ -32,25 +35,35 @@ export default class Auth extends Component{
 
                 window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
 
-                window.location = urls.PROFILE;
+                window.location = routes.PROFILE;
+
+                this.setState({processing: false});
             })
-            .catch(err => alert(err));
+            .catch(err => {
+                this.setState({processing: false});
+                alert(err)
+            });
     }
 
     onSubmitFormRegister(e){
         e.preventDefault();
 
+        this.setState({processing: true});
+
         let formData = new FormData(e.target);
 
         console.log('register');
 
-        axios.post('/api/user/register', formData)
-            .then(res => console.log(res))
+        axios.post(api.REGISTER, formData)
+            .then(res => {
+                this.setState({processing: false});
+                console.log(res)
+            })
             .catch(err => alert(err));
     }
 
     render(){
-        return(
+        return this.state.processing ? (<h5>PROCESSING...</h5>) :(
             <div>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>

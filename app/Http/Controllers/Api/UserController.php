@@ -59,7 +59,7 @@ class UserController extends Controller
         $token = $request->user()->token();
         $token->revoke();
 
-        $response = 'You have been succesfully logged out!';
+        $response = ['message' => 'You have been succesfully logged out!', 'code' => 200];
         return response($response, 200);
 
     }
