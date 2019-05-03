@@ -10,7 +10,7 @@ export const SideBar = () => (
         <ul className="list-unstyled components">
             <li className="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                    <i className="fas fa-home"/>
+                    <i className="fa fa-home"/>
                     Home
                 </a>
                 <ul className="collapse list-unstyled" id="homeSubmenu">

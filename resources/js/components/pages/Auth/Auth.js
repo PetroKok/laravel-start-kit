@@ -2,74 +2,103 @@ import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom'
 import Login from "./Login";
 import Register from "./Register";
-import {AuthRoute} from "../../common/AuthRoute";
 import api from "../../helpers/api_urls";
 import routes from "../../helpers/routes_urls";
 
-export default class Auth extends Component{
+import {AuthRoute} from "../../common/AuthRoute";
+import {Loader} from "../../common/Loader";
+import Modal from "../../common/Modal";
 
-    constructor(props){
+export default class Auth extends Component {
+
+    constructor(props) {
         super(props);
         this.state = {
-            processing: false
+            processing: false,
+            showModal: false,
+            errors: [],
+            arr: [{h:1,b:2}]
+
         };
         this.onSubmitFormLogin = this.onSubmitFormLogin.bind(this);
         this.onSubmitFormRegister = this.onSubmitFormRegister.bind(this);
+        this.renderForm = this.renderForm.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
-    onSubmitFormLogin(e){
+    closeModal(){
+        this.setState({showModal: false})
+    }
+
+    onSubmitFormLogin(e) {
         e.preventDefault();
 
         this.setState({processing: true});
 
         let formData = new FormData(e.target);
 
-        console.log('login');
-
         axios.post(api.LOGIN, formData)
             .then(res => {
-
                 localStorage.setItem('token', res.data.token);
-
-                localStorage.setItem('user', res.data.user);
-
                 window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
-
                 window.location = routes.PROFILE;
-
                 this.setState({processing: false});
             })
             .catch(err => {
                 this.setState({processing: false});
-                alert(err)
+                alert(err);
+                console.log(err);
             });
     }
 
-    onSubmitFormRegister(e){
+    onSubmitFormRegister(e) {
         e.preventDefault();
 
         this.setState({processing: true});
 
         let formData = new FormData(e.target);
 
-        console.log('register');
-
         axios.post(api.REGISTER, formData)
             .then(res => {
+                localStorage.setItem('token', res.data.token);
+                window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
+                window.location = routes.PROFILE;
                 this.setState({processing: false});
-                console.log(res)
             })
-            .catch(err => alert(err));
+            .catch(err => {
+                this.setState({processing: false});
+                alert(err);
+                console.log(err);
+            });
     }
 
-    render(){
-        return this.state.processing ? (<h5>PROCESSING...</h5>) :(
-            <div>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
+    renderForm() {
+        return this.state.processing
+            ? (<Loader/>)
+            : (
+                <div className="mt-5 col-md-6 offset-3">
 
-                <AuthRoute path='/login' render={() => <Login onSubmitForm={this.onSubmitFormLogin} />}/>
-                <AuthRoute path='/register' render={() => <Register onSubmitForm={this.onSubmitFormRegister}/>}/>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}}>
+                        <Link className="btn btn-primary" to="/login">Login</Link>
+                        <Link className="btn btn-primary" to="/register">Register</Link>
+                    </div>
+
+                    {this.state.showModal && this.state.errors &&
+                        <Modal onClose={this.closeModal} data={this.state.arr}>
+                            <h2>TEXT</h2>
+                        </Modal>
+                    }
+
+                    <AuthRoute path='/login' render={() => <Login onSubmitForm={this.onSubmitFormLogin}/>}/>
+                    <AuthRoute path='/register' render={() => <Register onSubmitForm={this.onSubmitFormRegister}/>}/>
+                </div>
+            )
+    }
+
+    render() {
+        return (
+            <div className="container">
+                {this.renderForm()}
             </div>
         );
     }

@@ -1,6 +1,7 @@
 export default {
+    USER: "/api/user",
     LOGIN: "/api/user/login",
     REGISTER: "/api/user/register",
     LOGOUT: "/api/user/logout",
-    USER: "/api/user",
+    PROFILE_UPDATE: "/api/user/update",
 }

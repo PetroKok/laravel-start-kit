@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from '../../common/axois'
 import api from '../../helpers/api_urls'
 import routes from '../../helpers/routes_urls'
+import ModalLoader from "../../common/ModalLoader";
 
 export default class Nav extends React.Component {
 
@@ -33,6 +34,8 @@ export default class Nav extends React.Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
 
+                    {this.state.processing && <ModalLoader/>}
+
                     <button type="button" id="sidebarCollapse" className="btn btn-info">
                         <i className="fas fa-align-left"/>
                     </button>
@@ -50,7 +53,7 @@ export default class Nav extends React.Component {
                                 <Link className="nav-link" to="/profile/settings">Settings</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#" onClick={this.logout}>Logout</a>
+                                <button className="nav-link a-logout" onClick={this.logout}>Logout</button>
                             </li>
                         </ul>
                     </div>
