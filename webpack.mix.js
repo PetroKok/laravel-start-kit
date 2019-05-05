@@ -13,3 +13,7 @@ const mix = require('laravel-mix');
 
 mix.react('resources/js/profile.js', 'public/js/pages')
    .sass('resources/sass/app.scss', 'public/css');
+
+mix.styles([
+    'react-notifications/lib/notifications.css',
+], 'public/css/react-notify.css');

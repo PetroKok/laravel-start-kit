@@ -46,11 +46,6 @@ a:focus {
     margin: 40px 0;
 }
 
-i,
-span {
-    display: inline-block;
-}
-
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -312,4 +307,8 @@ div.loader img {
     right: 3%;
     top: 3%;
     background-color: #73d57f91;
+}
+
+.list-unstyled li svg{
+    width: 2em!important;
 }

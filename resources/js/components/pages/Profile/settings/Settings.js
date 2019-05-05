@@ -1,9 +1,11 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import api_urls from "../../../helpers/api_urls";
-import axios from '../../../common/axois'
+import axios from '../../../common/axois';
 import {Loader} from "../../../common/Loader";
 import ModalLoader from "../../../common/ModalLoader";
 import Modal from "../../../common/Modal";
+import 'react-notifications/lib/notifications.css';
 
 class Settings extends Component {
 
@@ -12,9 +14,9 @@ class Settings extends Component {
         this.state = {
             user: [],
             processing: false,
-            message: false,
         };
         this.onSubmitForm = this.onSubmitForm.bind(this);
+
     }
 
     componentDidMount() {
@@ -49,24 +51,20 @@ class Settings extends Component {
                     processing: false,
                     message: res.data.message
                 });
-                console.log(res.data.message);
+                NotificationManager.success('Success message', 'Title here', 50000);
             })
             .catch(err => {
                 console.log(err);
                 this.setState({processing: false});
             })
-
-        // console.log(this.state.message);
-
     }
 
     render() {
         return this.state.user.length !== 0 ? (
-            <form method="POST" onSubmit={this.onSubmitForm} className="">
+            <form method="POST" onSubmit={this.onSubmitForm} className="col-md-8">
 
                 {this.state.processing && <ModalLoader/>}
 
-                {this.state.message && <Modal data={this.state.message}/>}
 
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -81,8 +79,10 @@ class Settings extends Component {
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-center">Submit</button>
+                <NotificationContainer/>
 
             </form>
+
         ) : <Loader/>;
     };
 }

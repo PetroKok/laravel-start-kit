@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import routes_urls from "../../helpers/routes_urls";
 
 export const SideBar = () => (
     <nav id="sidebar">
@@ -9,27 +11,21 @@ export const SideBar = () => (
 
         <ul className="list-unstyled components">
             <li className="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                    <i className="fa fa-home"/>
+                <Link to={routes_urls.PROFILE}>
+                    <i className="fas fa-home"/>
                     Home
-                </a>
-                <ul className="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1asd as dasd as d</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
+                </Link>
             </li>
             <li>
-                <a href="#">
-                    <i className="fas fa-briefcase"/>
-                    About
+                <a href="#files" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                    <i className="fas fa-folder"/>
+                    Files
                 </a>
+                <ul className="collapse list-unstyled" id="files">
+                    <li>
+                        <a href="#">Type</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">

@@ -6,6 +6,7 @@ import {SideBar} from "./SideBar";
 import {Content} from "./Content";
 
 import Settings from "./settings/Settings";
+import FileLoader from "./fileLoader/FileLoader";
 import api from "../../helpers/api_urls";
 
 
@@ -23,6 +24,7 @@ class Home extends Component {
                 <SideBar/>
                 <Content>
                     <Switch>
+                        <Route path="/profile" exact component={FileLoader}/>
                         <Route path="/profile/settings" component={Settings}/>
                     </Switch>
                 </Content>

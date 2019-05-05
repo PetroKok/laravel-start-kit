@@ -2,6 +2,7 @@
 
 @push("styles")
     <link rel="stylesheet" href="{{asset('css/profile/style4.css')}}">
+    <link rel="stylesheet" href="{{asset('css/react-notify.css')}}">
 
 <!-- Our Custom CSS -->
 {{--<link rel="stylesheet" href="style4.css">--}}

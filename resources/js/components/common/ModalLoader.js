@@ -6,7 +6,6 @@ export default class ModalLoader extends React.Component{
     componentWillMount() {
         this.root = document.createElement('div');
         document.body.appendChild(this.root);
-        console.log(this.props.data);
     }
 
     componentWillUnmount() {
