@@ -1,15 +1,15 @@
 @extends('app.layouts.app')
 
 @push("styles")
-    <link rel="stylesheet" href="{{asset('css/profile/style4.css')}}">
-    <link rel="stylesheet" href="{{asset('css/react-notify.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/profile/style4.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/react-notify.css')}}">
 
 <!-- Our Custom CSS -->
 {{--<link rel="stylesheet" href="style4.css">--}}
 
 <!-- Font Awesome JS -->
-<script type="text/javascript" src="{{asset('js/solid.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/fontawesome.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/solid.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/fontawesome.js')}}"></script>
 
 @endpush
 
