@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import axios from '../../common/axois'
+import axios from '../../common/axios'
 import api from '../../helpers/api_urls'
 import routes from '../../helpers/routes_urls'
 import ModalLoader from "../../common/ModalLoader";

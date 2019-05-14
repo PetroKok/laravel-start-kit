@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch, Link} from 'react-router-dom';
-import axios from '../../common/axois'
+import axios from '../../common/axios'
 import {ProfileLayout} from "../../layouts/ProfileLayout";
 import {SideBar} from "./SideBar";
 import {Content} from "./Content";

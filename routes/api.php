@@ -21,6 +21,8 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::post('/user/login', 'AuthController@login')->name('login.api');
     Route::post('/user/register', 'AuthController@register')->name('register.api');
 
+    Route::get('/files/{slug}','ImageController@index');
+
     // PRIVATE ROUTES
     Route::middleware('auth:api')->group(function () {
 
@@ -29,6 +31,13 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/user/update/{id}','UserController@update');
         Route::post('/user/logout', 'AuthController@logout')->name('logout');
 
+        // FILES ROUTES (PROFILE)
+        Route::post('/files','FileUploadController@index');
+        Route::post('/files/upload','FileUploadController@store');
+        Route::delete('/files/delete/{id}','FileUploadController@delete');
+
+
+//        Route::get('/image/{slug}','ImageController@index');
 
     });
 

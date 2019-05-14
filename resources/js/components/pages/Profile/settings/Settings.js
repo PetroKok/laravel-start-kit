@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import api_urls from "../../../helpers/api_urls";
-import axios from '../../../common/axois';
+import axios from '../../../common/axios';
 import {Loader} from "../../../common/Loader";
 import ModalLoader from "../../../common/ModalLoader";
 import Modal from "../../../common/Modal";
@@ -51,7 +51,7 @@ class Settings extends Component {
                     processing: false,
                     message: res.data.message
                 });
-                NotificationManager.success('Success message', 'Title here', 50000);
+                NotificationManager.success('Success message', 'Title here', 5000);
             })
             .catch(err => {
                 console.log(err);

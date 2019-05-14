@@ -3,4 +3,6 @@ export default {
     LOGIN: "/login",
     REGISTER: "/register",
     HOME: "/",
+    FILES: "/files",
+    IMAGE: "/image/",
 }

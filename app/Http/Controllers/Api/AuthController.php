@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,6 +29,7 @@ class AuthController extends Controller
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['token' => $token, "user" => $user];
+        Cookie::queue(Cookie::make('token', $token, 60*24*30));
 
         return response($response, 200);
 
@@ -35,7 +37,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
         $this->validate($request,[
             'email' => 'required',
             'password' => 'required',
@@ -46,6 +47,7 @@ class AuthController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+                Cookie::queue(Cookie::make('token', $token, 60*24*30));
                 $response = ['token' => $token, "user" => $user];
                 return response($response, 200);
             } else {
@@ -64,6 +66,7 @@ class AuthController extends Controller
 
         $token = $request->user()->token();
         $token->revoke();
+        Cookie::queue(Cookie::forget('token'));
 
         $response = ['message' => 'You have been succesfully logged out!', 'code' => 200];
         return response($response, 200);

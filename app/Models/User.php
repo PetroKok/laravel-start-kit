@@ -41,6 +41,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /** START RELATIONSHIP **/
+
+    public function files(){
+        return $this->hasMany(File::class);
+    }
+
+    /** END RELATIONSHIP **/
+
+
     public static function ban(){
 
     }

@@ -76,7 +76,7 @@ export default class Auth extends Component {
         return this.state.processing
             ? (<Loader/>)
             : (
-                <div className="mt-5 col-md-6 offset-3">
+                <div className="mt-5 col-md-6 offset-md-3">
 
                     <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}}>
                         <Link className="btn btn-primary" to="/login">Login</Link>
