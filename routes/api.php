@@ -34,6 +34,7 @@ Route::group(['middleware' => ['json.response']], function () {
         // FILES ROUTES (PROFILE)
         Route::post('/files','FileUploadController@index');
         Route::post('/files/upload','FileUploadController@store');
+        Route::post('/files/remove','FileUploadController@deleteFiles');
         Route::delete('/files/delete/{id}','FileUploadController@delete');
 
 

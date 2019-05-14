@@ -68929,7 +68929,8 @@ __webpack_require__.r(__webpack_exports__);
   FILES: "/api/files",
   FILES_UPLOAD: "/api/files/upload",
   FILES_GET: "/api/files/",
-  FILE_DELETE_ID: "/api/files/delete/"
+  FILE_DELETE_ID: "/api/files/delete/",
+  FILES_DELETE: "/api/files/remove"
 });
 
 /***/ }),
@@ -69790,33 +69791,93 @@ function (_React$Component) {
       files: null,
       items: null,
       processing: false,
-      btn: false
+      btn: false,
+      checked_items: []
     };
     _this.deleteFile = _this.deleteFile.bind(_assertThisInitialized(_this));
+    _this.deleteFiles = _this.deleteFiles.bind(_assertThisInitialized(_this));
+    _this.onCheckInput = _this.onCheckInput.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(FileLoader, [{
+    key: "deleteFiles",
+    value: function deleteFiles() {
+      this.deleteFile(this.state.checked_items);
+    }
+  }, {
+    key: "onCheckInput",
+    value: function onCheckInput(arr) {
+      var data = this.state.checked_items;
+
+      var n = lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(data, function (e) {
+        return e === arr;
+      });
+
+      if (n.length === 0) {
+        data.push(arr);
+        this.setState({
+          checked_items: data
+        });
+      }
+
+      console.log(this.state.checked_items);
+    }
+  }, {
     key: "deleteFile",
     value: function deleteFile(file) {
       var _this2 = this;
 
-      this.setState({
-        processing: true
-      });
-      Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])()["delete"](_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILE_DELETE_ID + file.id).then(function (res) {
-        lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this2.state.items, {
-          id: file.id
+      if (Array.isArray(file)) {
+        this.setState({
+          processing: true
         });
-
-        _this2.setState({
-          processing: false
+        var data = new FormData();
+        file.map(function (f) {
+          data.append('files[]', f);
         });
+        Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_DELETE, data).then(function (res) {
+          file.map(function (f) {
+            lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this2.state.items, {
+              id: f
+            });
+          });
 
-        react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', res.data.message, 5000);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
+          _this2.setState({
+            processing: false,
+            checked_items: []
+          });
+
+          react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', res.data.message, 5000);
+        })["catch"](function (err) {
+          console.log(err);
+
+          _this2.setState({
+            processing: false
+          });
+        });
+      } else {
+        this.setState({
+          processing: true
+        });
+        Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])()["delete"](_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILE_DELETE_ID + file.id).then(function (res) {
+          lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this2.state.items, {
+            id: file.id
+          });
+
+          _this2.setState({
+            processing: false
+          });
+
+          react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', res.data.message, 5000);
+        })["catch"](function (err) {
+          console.log(err);
+
+          _this2.setState({
+            processing: false
+          });
+        });
+      }
     }
   }, {
     key: "componentDidMount",
@@ -69848,8 +69909,12 @@ function (_React$Component) {
 
       if (files.length !== 0) {
         this.setState({
-          processing: true,
+          processing: true
+        });
+        this.setState({
           btn: true
+        }, function () {
+          return console.log();
         });
         var data = new FormData();
         files.map(function (file, key) {
@@ -69860,21 +69925,28 @@ function (_React$Component) {
             var items = res.data.files;
 
             _this4.setState({
-              items: lodash__WEBPACK_IMPORTED_MODULE_5___default.a.unionBy(items, _this4.state.items, "id")
-            });
-
-            _this4.setState({
-              btn: "Store files",
+              items: lodash__WEBPACK_IMPORTED_MODULE_5___default.a.unionBy(items, _this4.state.items, "id"),
+              btn: false,
               processing: false,
               files: null
             });
 
             react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', 'Uploaded files', 5000);
           } else {
+            _this4.setState({
+              btn: false,
+              processing: false
+            });
+
             react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].error('Error message', 'HERE IS NOT FILES IN RESPONSE!', 5000);
           }
         })["catch"](function (err) {
-          return console.log(err);
+          console.log(err);
+
+          _this4.setState({
+            btn: false,
+            processing: false
+          });
         });
         e.target.value = null;
       }
@@ -69890,11 +69962,7 @@ function (_React$Component) {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        method: "post",
-        action: "#",
-        id: "#"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group files color"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "store",
@@ -69903,16 +69971,21 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })), this.state.files && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "store",
         className: "add-files",
-        id: "fileFather",
+        id: "upload",
         onClick: function onClick(e) {
           return _this5.uploadFiles(e);
         }
-      }, this.state.btn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-upload"
-      }) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, this.state.btn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-spinner"
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-upload"
+      })), this.state.checked_items.length !== 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "add-files add-files-right",
+        id: "fileFather",
+        onClick: this.deleteFiles
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-trash"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         name: "files[]",
@@ -69927,7 +70000,8 @@ function (_React$Component) {
         }
       }))))), this.state.processing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_ModalLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null), this.state.items && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListFiles__WEBPACK_IMPORTED_MODULE_3__["default"], {
         files: this.state.items,
-        "delete": this.deleteFile
+        "delete": this.deleteFile,
+        onCheck: this.onCheckInput
       }) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_Loader__WEBPACK_IMPORTED_MODULE_4__["Loader"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationContainer"], null));
     }
   }]);
@@ -70000,7 +70074,10 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "block-checkbox"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "checkbox"
+          type: "checkbox",
+          onChange: function onChange() {
+            return _this.props.onCheck(file.id);
+          }
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "checkmark"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {

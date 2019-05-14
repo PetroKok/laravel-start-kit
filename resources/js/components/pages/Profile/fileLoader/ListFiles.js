@@ -14,7 +14,7 @@ export default class ListFiles extends React.Component {
                         <div key={key} className="list-group-item list-group-item-action">
                             <div className="line-border">
                                 <label className="block-checkbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" onChange={() => this.props.onCheck(file.id)}/>
                                     <span className="checkmark"/>
                                 </label>
                                 <img src={routes_urls.IMAGE+file.src} alt="" height="25" className="mr-3"/>

@@ -10,6 +10,11 @@ class FileRepository extends ModelRepository
 {
     protected $model;
 
+    public function index()
+    {
+        return Auth::user()->files;
+    }
+
     public function store(array $data)
     {
         $info_files = [];

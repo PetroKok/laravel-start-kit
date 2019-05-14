@@ -8,4 +8,5 @@ export default {
     FILES_UPLOAD: "/api/files/upload",
     FILES_GET: "/api/files/",
     FILE_DELETE_ID: "/api/files/delete/",
+    FILES_DELETE: "/api/files/remove",
 }

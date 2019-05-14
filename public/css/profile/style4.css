@@ -276,7 +276,7 @@ div.loader img {
     height: 100px;
 }
 
-.btn-center{
+.btn-center {
     position: relative;
     width: 50%;
     left: 50%;
@@ -284,15 +284,16 @@ div.loader img {
 
 }
 
-.a-logout{
+.a-logout {
     background: none;
     border: none;
 }
-.a-logout:focus{
+
+.a-logout:focus {
     outline: 0;
 }
 
-.global-alert{
+.global-alert {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -301,7 +302,7 @@ div.loader img {
     background-color: #00000017;
 }
 
-.modal-alert{
+.modal-alert {
     position: absolute;
     width: 40%;
     right: 3%;
@@ -309,16 +310,24 @@ div.loader img {
     background-color: #73d57f91;
 }
 
-.list-unstyled li svg{
-    width: 2em!important;
+.list-unstyled li svg {
+    width: 2em !important;
 }
 
 
-.add-files{
+.add-files {
     background-color: #8deb6c;
     border-radius: 50%;
     padding: 10px 15px;
     cursor: pointer;
+    margin-right: 7px;
+}
+
+.add-files-right {
+    float: right;
+    margin-right: 0 !important;
+    margin-left: 7px !important;
+
 }
 
 .block-checkbox {
@@ -387,10 +396,10 @@ div.loader img {
     transform: rotate(45deg);
 }
 
-.btn-padding-unset{
+.btn-padding-unset {
     padding: 1px 6px;
 }
 
-.cursor-pointer > li{
+.cursor-pointer > li {
     cursor: pointer;
 }

@@ -16,22 +16,66 @@ export default class FileLoader extends React.Component {
             files: null,
             items: null,
             processing: false,
-            btn: false
+            btn: false,
+            checked_items: []
         };
         this.deleteFile = this.deleteFile.bind(this);
+        this.deleteFiles = this.deleteFiles.bind(this);
+        this.onCheckInput = this.onCheckInput.bind(this);
+    }
+
+    deleteFiles(){
+        this.deleteFile(this.state.checked_items);
+    }
+
+    onCheckInput(arr) {
+        let data = this.state.checked_items;
+        let n = _.remove(data, (e) => {
+            return e === arr;
+        });
+        if (n.length === 0) {
+            data.push(arr);
+            this.setState({checked_items: data})
+        }
+        console.log(this.state.checked_items);
     }
 
     deleteFile(file) {
-        this.setState({processing: true});
-        axios().delete(api_urls.FILE_DELETE_ID + file.id)
-            .then(res => {
-                _.remove(this.state.items, {
-                    id: file.id
-                });
-                this.setState({processing: false});
-                NotificationManager.success('Success message', res.data.message, 5000);
-            })
-            .catch(err => console.log(err))
+        if(Array.isArray(file)){
+            this.setState({processing: true});
+            let data = new FormData();
+            file.map((f) => {
+                data.append('files[]', f);
+            });
+            axios().post(api_urls.FILES_DELETE, data)
+                .then(res => {
+                    file.map((f) => {
+                        _.remove(this.state.items, {
+                            id: f
+                        });
+                    });
+                    this.setState({processing: false, checked_items: []});
+                    NotificationManager.success('Success message', res.data.message, 5000);
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setState({processing: false});
+                })
+        }else{
+            this.setState({processing: true});
+            axios().delete(api_urls.FILE_DELETE_ID + file.id)
+                .then(res => {
+                    _.remove(this.state.items, {
+                        id: file.id
+                    });
+                    this.setState({processing: false});
+                    NotificationManager.success('Success message', res.data.message, 5000);
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setState({processing: false});
+                })
+        }
     }
 
     componentDidMount() {
@@ -50,7 +94,8 @@ export default class FileLoader extends React.Component {
         e.preventDefault();
         let files = this.state.files;
         if (files.length !== 0) {
-            this.setState({processing: true, btn: true});
+            this.setState({processing: true});
+            this.setState({btn: true}, () => console.log());
             let data = new FormData();
             files.map((file, key) => {
                 data.append('files[]', file);
@@ -59,14 +104,17 @@ export default class FileLoader extends React.Component {
                 .then(res => {
                     if (res.data.files.length >= 1) {
                         let items = res.data.files;
-                        this.setState({items: _.unionBy(items, this.state.items, "id")});
-                        this.setState({btn: "Store files", processing: false, files: null});
+                        this.setState({items: _.unionBy(items, this.state.items, "id"), btn: false, processing: false, files: null});
                         NotificationManager.success('Success message', 'Uploaded files', 5000);
                     } else {
+                        this.setState({btn: false, processing: false});
                         NotificationManager.error('Error message', 'HERE IS NOT FILES IN RESPONSE!', 5000);
                     }
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.log(err);
+                    this.setState({btn: false, processing: false});
+                });
             e.target.value = null;
         }
     }
@@ -77,31 +125,40 @@ export default class FileLoader extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <form method="post" action="#" id="#">
+                            <form>
                                 <div className="form-group files color">
                                     <label htmlFor="store" className="add-files" id="fileFather">
                                         <i className="fas fa-plus"/>
                                     </label>
                                     {this.state.files && (
-                                        <label htmlFor="store" className="add-files" id="fileFather"
+                                        <label className="add-files" id="upload"
                                                onClick={e => this.uploadFiles(e)}>
                                             {this.state.btn
-                                                && (<i className="fas fa-upload"/>)
-                                                || (<i className="fas fa-spinner"/>)
+                                                ? <i className="fas fa-spinner"/>
+                                                : <i className="fas fa-upload"/>
                                             }
                                         </label>
                                     )}
+                                    {
+                                        this.state.checked_items.length !== 0 &&
+                                        <label className="add-files add-files-right" id="fileFather"
+                                               onClick={this.deleteFiles}>
+                                            <i className="fas fa-trash"/>
+                                        </label>
+                                    }
+
                                     <input type="file" name="files[]" id="store" className="form-control-file"
                                            multiple={true}
                                            onChange={e => this.getFiles(e)} style={{display: 'none'}}/>
-
 
                                 </div>
                             </form>
                         </div>
                     </div>
                     {this.state.processing && <ModalLoader/>}
-                    {this.state.items && <ListFiles files={this.state.items} delete={this.deleteFile}/> || <Loader/>}
+                    {this.state.items &&
+                    <ListFiles files={this.state.items} delete={this.deleteFile} onCheck={this.onCheckInput}/> ||
+                    <Loader/>}
                 </div>
                 <NotificationContainer/>
 
