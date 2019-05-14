@@ -16,10 +16,10 @@
     "laravel/tinker": "^1.0",
     "nesbot/carbon": "2.17.0",
     "predis/predis": "^1.1",
+    "barryvdh/laravel-debugbar": "^3.2",
     "ext-json": "*"
   },
   "require-dev": {
-    "barryvdh/laravel-debugbar": "^3.2",
     "beyondcode/laravel-dump-server": "^1.0",
     "filp/whoops": "^2.0",
     "fzaninotto/faker": "^1.4",
