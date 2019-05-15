@@ -327,7 +327,18 @@ div.loader img {
     float: right;
     margin-right: 0 !important;
     margin-left: 7px !important;
+}
 
+.danger {
+    background-color: #eb6c6d;
+}
+
+.primary {
+    background-color: #7386d5bf;
+}
+
+.access {
+    background-color: #7386d5bf;
 }
 
 .block-checkbox {

@@ -7,6 +7,11 @@ import _ from 'lodash';
 import ModalLoader from "../../../common/ModalLoader";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import {DeleteButton} from "../../../layouts/DeleteButton";
+import {EmailButton} from "../../../layouts/EmailButton";
+import {AddFilesButton} from "../../../layouts/AddFilesButton";
+import {UploadFilesButton} from "../../../layouts/UploadFilesButton";
+import {AccessButton} from "../../../layouts/AccessButton";
 
 export default class FileLoader extends React.Component {
 
@@ -19,13 +24,44 @@ export default class FileLoader extends React.Component {
             btn: false,
             checked_items: []
         };
+        this.getFiles = this.getFiles.bind(this);
+        this.downloadFile = this.downloadFile.bind(this);
+        this.accessFiles = this.accessFiles.bind(this);
         this.deleteFile = this.deleteFile.bind(this);
         this.deleteFiles = this.deleteFiles.bind(this);
+        this.uploadFiles = this.uploadFiles.bind(this);
+        this.sendEmailFiles = this.sendEmailFiles.bind(this);
         this.onCheckInput = this.onCheckInput.bind(this);
     }
 
-    deleteFiles(){
-        this.deleteFile(this.state.checked_items);
+
+    sendEmailFiles() {
+        let files = this.state.checked_items;
+        let data = new FormData();
+        this.setState({processing: true});
+        files.map((file) => {
+            data.append('files[]', file);
+        });
+        axios().post(api_urls.FILES_SEND_EMAIL, data)
+            .then(res => {
+
+                $('input[type="checkbox"]').prop('checked', false);
+
+                this.setState({processing: false, checked_items: []});
+
+                NotificationManager.success('Success message', 'Uploaded files', 5000);
+
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
+
+
+    downloadFile(file) {
+
+    }
+
+    accessFiles() {
     }
 
     onCheckInput(arr) {
@@ -33,6 +69,9 @@ export default class FileLoader extends React.Component {
         let n = _.remove(data, (e) => {
             return e === arr;
         });
+
+        this.setState({checked_items: data});
+
         if (n.length === 0) {
             data.push(arr);
             this.setState({checked_items: data})
@@ -40,8 +79,12 @@ export default class FileLoader extends React.Component {
         console.log(this.state.checked_items);
     }
 
+    deleteFiles() {
+        this.deleteFile(this.state.checked_items);
+    }
+
     deleteFile(file) {
-        if(Array.isArray(file)){
+        if (Array.isArray(file)) {
             this.setState({processing: true});
             let data = new FormData();
             file.map((f) => {
@@ -54,6 +97,7 @@ export default class FileLoader extends React.Component {
                             id: f
                         });
                     });
+                    $('input[type="checkbox"]').prop('checked', false);
                     this.setState({processing: false, checked_items: []});
                     NotificationManager.success('Success message', res.data.message, 5000);
                 })
@@ -61,7 +105,7 @@ export default class FileLoader extends React.Component {
                     console.log(err);
                     this.setState({processing: false});
                 })
-        }else{
+        } else {
             this.setState({processing: true});
             axios().delete(api_urls.FILE_DELETE_ID + file.id)
                 .then(res => {
@@ -92,8 +136,10 @@ export default class FileLoader extends React.Component {
 
     uploadFiles(e) {
         e.preventDefault();
+
         let files = this.state.files;
-        if (files.length !== 0) {
+
+        if (this.state.files && files.length !== 0) {
             this.setState({processing: true});
             this.setState({btn: true}, () => console.log());
             let data = new FormData();
@@ -104,7 +150,13 @@ export default class FileLoader extends React.Component {
                 .then(res => {
                     if (res.data.files.length >= 1) {
                         let items = res.data.files;
-                        this.setState({items: _.unionBy(items, this.state.items, "id"), btn: false, processing: false, files: null});
+                        $('input[type="checkbox"]').prop('checked', false);
+                        this.setState({
+                            items: _.unionBy(items, this.state.items, "id"),
+                            btn: false,
+                            processing: false,
+                            files: null
+                        });
                         NotificationManager.success('Success message', 'Uploaded files', 5000);
                     } else {
                         this.setState({btn: false, processing: false});
@@ -127,29 +179,15 @@ export default class FileLoader extends React.Component {
                         <div className="col-md-12">
                             <form>
                                 <div className="form-group files color">
-                                    <label htmlFor="store" className="add-files" id="fileFather">
-                                        <i className="fas fa-plus"/>
-                                    </label>
-                                    {this.state.files && (
-                                        <label className="add-files" id="upload"
-                                               onClick={e => this.uploadFiles(e)}>
-                                            {this.state.btn
-                                                ? <i className="fas fa-spinner"/>
-                                                : <i className="fas fa-upload"/>
-                                            }
-                                        </label>
-                                    )}
-                                    {
-                                        this.state.checked_items.length !== 0 &&
-                                        <label className="add-files add-files-right" id="fileFather"
-                                               onClick={this.deleteFiles}>
-                                            <i className="fas fa-trash"/>
-                                        </label>
-                                    }
+                                    <AddFilesButton getFiles={this.getFiles}/>
+                                    <UploadFilesButton files={this.state.files} onUpload={this.uploadFiles}/>
 
-                                    <input type="file" name="files[]" id="store" className="form-control-file"
-                                           multiple={true}
-                                           onChange={e => this.getFiles(e)} style={{display: 'none'}}/>
+                                    {/* float right */}
+                                    <DeleteButton data={this.state.checked_items} onDelete={this.deleteFiles}/>
+                                    <EmailButton data={this.state.checked_items} onEmail={this.sendEmailFiles}/>
+                                    <AccessButton data={this.state.checked_items} onAccess={this.accessFiles}/>
+
+
 
                                 </div>
                             </form>
@@ -157,7 +195,7 @@ export default class FileLoader extends React.Component {
                     </div>
                     {this.state.processing && <ModalLoader/>}
                     {this.state.items &&
-                    <ListFiles files={this.state.items} delete={this.deleteFile} onCheck={this.onCheckInput}/> ||
+                    <ListFiles files={this.state.items} delete={this.deleteFile} download={this.downloadFile} onCheck={this.onCheckInput}/> ||
                     <Loader/>}
                 </div>
                 <NotificationContainer/>

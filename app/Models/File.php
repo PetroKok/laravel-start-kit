@@ -11,6 +11,8 @@ class File extends Model
 
     protected $appends = ['link'];
 
+    /** START RELATIONSHIP **/
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -18,8 +20,10 @@ class File extends Model
 
     public function getLinkAttribute()
     {
-        return 'public/'.Auth::user()->id.'/'.$this->src;
+        return 'public/' . Auth::user()->id . '/' . $this->src;
     }
+
+    /** END RELATIONSHIP **/
 
 
 }

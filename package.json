@@ -45,6 +45,7 @@
   "homepage": "https://github.com/PetroKok/laravel-start-kit#readme",
   "dependencies": {
     "babel-preset-react": "^6.24.1",
+    "js-file-download": "^0.4.5",
     "react-notifications": "^1.4.3",
     "react-router-dom": "^5.0.0"
   }

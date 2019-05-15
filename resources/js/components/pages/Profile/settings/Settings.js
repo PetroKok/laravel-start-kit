@@ -20,7 +20,8 @@ class Settings extends Component {
     }
 
     componentDidMount() {
-        axios().post(api_urls.USER)
+
+        axios().post(api_urls.USER_WITH_API)
             .then(res => {
                 this.setState({user: res.data});
             })
@@ -76,6 +77,12 @@ class Settings extends Component {
                     <label htmlFor="email">Email address</label>
                     <input type="text" name="email" id="email" className="form-control" placeholder="Enter email"
                            value={this.state.user.email} required onChange={(e) => this.onUserChange('email', e)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="secret_key">Secret key</label>
+                    <input type="text" id="secret_key" className="form-control" placeholder="Your api secret key"
+                           value={this.state.user.access_api[0].token} onChange={(e) => this.onUserChange('secret_key', e)}/>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-center">Submit</button>

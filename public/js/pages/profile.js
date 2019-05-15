@@ -68922,6 +68922,7 @@ function withStoredHeaders() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   USER: "/api/user",
+  USER_WITH_API: "/api/user-with-api",
   LOGIN: "/api/user/login",
   REGISTER: "/api/user/register",
   LOGOUT: "/api/user/logout",
@@ -68930,7 +68931,11 @@ __webpack_require__.r(__webpack_exports__);
   FILES_UPLOAD: "/api/files/upload",
   FILES_GET: "/api/files/",
   FILE_DELETE_ID: "/api/files/delete/",
-  FILES_DELETE: "/api/files/remove"
+  // param is {id}
+  FILES_DELETE: "/api/files/remove",
+  FILES_SEND_EMAIL: "/api/files/send_email",
+  FILES_SET_ACCESS: "/api/files/set_access",
+  FILES_DOWNLOAD: "/api/files/download"
 });
 
 /***/ }),
@@ -68955,6 +68960,118 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/layouts/AccessButton.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/layouts/AccessButton.js ***!
+  \*********************************************************/
+/*! exports provided: AccessButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccessButton", function() { return AccessButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var AccessButton = function AccessButton(props) {
+  return props.data.length !== 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "add-files add-files-right access",
+    id: "fileFather",
+    onClick: props.onAccess
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-unlock-alt"
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/AddFilesButton.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/layouts/AddFilesButton.js ***!
+  \***********************************************************/
+/*! exports provided: AddFilesButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddFilesButton", function() { return AddFilesButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var AddFilesButton = function AddFilesButton(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "store",
+    className: "add-files",
+    id: "fileFather"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-plus"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    name: "files[]",
+    id: "store",
+    className: "form-control-file",
+    multiple: true,
+    onChange: function onChange(e) {
+      return props.getFiles(e);
+    },
+    style: {
+      display: 'none'
+    }
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/DeleteButton.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/layouts/DeleteButton.js ***!
+  \*********************************************************/
+/*! exports provided: DeleteButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteButton", function() { return DeleteButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var DeleteButton = function DeleteButton(props) {
+  return props.data.length !== 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "add-files add-files-right danger",
+    id: "fileFather",
+    onClick: props.onDelete
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-trash"
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/EmailButton.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/layouts/EmailButton.js ***!
+  \********************************************************/
+/*! exports provided: EmailButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailButton", function() { return EmailButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var EmailButton = function EmailButton(props) {
+  return props.data.length !== 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "add-files add-files-right primary",
+    id: "email-button",
+    onClick: props.onEmail
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-paper-plane"
+  }));
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/layouts/ProfileLayout.js":
 /*!**********************************************************!*\
   !*** ./resources/js/components/layouts/ProfileLayout.js ***!
@@ -68972,6 +69089,33 @@ var ProfileLayout = function ProfileLayout(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper"
   }, props.children);
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/UploadFilesButton.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/layouts/UploadFilesButton.js ***!
+  \**************************************************************/
+/*! exports provided: UploadFilesButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadFilesButton", function() { return UploadFilesButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var UploadFilesButton = function UploadFilesButton(props) {
+  return props.files && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "add-files",
+    id: "upload",
+    onClick: function onClick(e) {
+      return props.onUpload(e);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-upload"
+  }));
 };
 
 /***/ }),
@@ -69748,6 +69892,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notifications/lib/notifications.css */ "./node_modules/react-notifications/lib/notifications.css");
 /* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../layouts/DeleteButton */ "./resources/js/components/layouts/DeleteButton.js");
+/* harmony import */ var _layouts_EmailButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../layouts/EmailButton */ "./resources/js/components/layouts/EmailButton.js");
+/* harmony import */ var _layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../layouts/AddFilesButton */ "./resources/js/components/layouts/AddFilesButton.js");
+/* harmony import */ var _layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../layouts/UploadFilesButton */ "./resources/js/components/layouts/UploadFilesButton.js");
+/* harmony import */ var _layouts_AccessButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../layouts/AccessButton */ "./resources/js/components/layouts/AccessButton.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69765,6 +69914,11 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
 
 
 
@@ -69794,17 +69948,50 @@ function (_React$Component) {
       btn: false,
       checked_items: []
     };
+    _this.getFiles = _this.getFiles.bind(_assertThisInitialized(_this));
+    _this.downloadFile = _this.downloadFile.bind(_assertThisInitialized(_this));
+    _this.accessFiles = _this.accessFiles.bind(_assertThisInitialized(_this));
     _this.deleteFile = _this.deleteFile.bind(_assertThisInitialized(_this));
     _this.deleteFiles = _this.deleteFiles.bind(_assertThisInitialized(_this));
+    _this.uploadFiles = _this.uploadFiles.bind(_assertThisInitialized(_this));
+    _this.sendEmailFiles = _this.sendEmailFiles.bind(_assertThisInitialized(_this));
     _this.onCheckInput = _this.onCheckInput.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(FileLoader, [{
-    key: "deleteFiles",
-    value: function deleteFiles() {
-      this.deleteFile(this.state.checked_items);
+    key: "sendEmailFiles",
+    value: function sendEmailFiles() {
+      var _this2 = this;
+
+      var files = this.state.checked_items;
+      var data = new FormData();
+      this.setState({
+        processing: true
+      });
+      files.map(function (file) {
+        data.append('files[]', file);
+      });
+      Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_SEND_EMAIL, data).then(function (res) {
+        $('input[type="checkbox"]').prop('checked', false);
+
+        _this2.setState({
+          processing: false,
+          checked_items: []
+        });
+
+        react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', 'Uploaded files', 5000);
+        console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
+  }, {
+    key: "downloadFile",
+    value: function downloadFile(file) {}
+  }, {
+    key: "accessFiles",
+    value: function accessFiles() {}
   }, {
     key: "onCheckInput",
     value: function onCheckInput(arr) {
@@ -69812,6 +69999,10 @@ function (_React$Component) {
 
       var n = lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(data, function (e) {
         return e === arr;
+      });
+
+      this.setState({
+        checked_items: data
       });
 
       if (n.length === 0) {
@@ -69824,9 +70015,14 @@ function (_React$Component) {
       console.log(this.state.checked_items);
     }
   }, {
+    key: "deleteFiles",
+    value: function deleteFiles() {
+      this.deleteFile(this.state.checked_items);
+    }
+  }, {
     key: "deleteFile",
     value: function deleteFile(file) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (Array.isArray(file)) {
         this.setState({
@@ -69838,12 +70034,13 @@ function (_React$Component) {
         });
         Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_DELETE, data).then(function (res) {
           file.map(function (f) {
-            lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this2.state.items, {
+            lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this3.state.items, {
               id: f
             });
           });
+          $('input[type="checkbox"]').prop('checked', false);
 
-          _this2.setState({
+          _this3.setState({
             processing: false,
             checked_items: []
           });
@@ -69852,7 +70049,7 @@ function (_React$Component) {
         })["catch"](function (err) {
           console.log(err);
 
-          _this2.setState({
+          _this3.setState({
             processing: false
           });
         });
@@ -69861,11 +70058,11 @@ function (_React$Component) {
           processing: true
         });
         Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])()["delete"](_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILE_DELETE_ID + file.id).then(function (res) {
-          lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this2.state.items, {
+          lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this3.state.items, {
             id: file.id
           });
 
-          _this2.setState({
+          _this3.setState({
             processing: false
           });
 
@@ -69873,7 +70070,7 @@ function (_React$Component) {
         })["catch"](function (err) {
           console.log(err);
 
-          _this2.setState({
+          _this3.setState({
             processing: false
           });
         });
@@ -69882,10 +70079,10 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this3 = this;
+      var _this4 = this;
 
       Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES).then(function (res) {
-        _this3.setState({
+        _this4.setState({
           items: res.data
         });
       })["catch"](function (err) {
@@ -69902,12 +70099,12 @@ function (_React$Component) {
   }, {
     key: "uploadFiles",
     value: function uploadFiles(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       e.preventDefault();
       var files = this.state.files;
 
-      if (files.length !== 0) {
+      if (this.state.files && files.length !== 0) {
         this.setState({
           processing: true
         });
@@ -69923,9 +70120,10 @@ function (_React$Component) {
         Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_UPLOAD, data).then(function (res) {
           if (res.data.files.length >= 1) {
             var items = res.data.files;
+            $('input[type="checkbox"]').prop('checked', false);
 
-            _this4.setState({
-              items: lodash__WEBPACK_IMPORTED_MODULE_5___default.a.unionBy(items, _this4.state.items, "id"),
+            _this5.setState({
+              items: lodash__WEBPACK_IMPORTED_MODULE_5___default.a.unionBy(items, _this5.state.items, "id"),
               btn: false,
               processing: false,
               files: null
@@ -69933,7 +70131,7 @@ function (_React$Component) {
 
             react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', 'Uploaded files', 5000);
           } else {
-            _this4.setState({
+            _this5.setState({
               btn: false,
               processing: false
             });
@@ -69943,7 +70141,7 @@ function (_React$Component) {
         })["catch"](function (err) {
           console.log(err);
 
-          _this4.setState({
+          _this5.setState({
             btn: false,
             processing: false
           });
@@ -69954,8 +70152,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69964,43 +70160,24 @@ function (_React$Component) {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group files color"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "store",
-        className: "add-files",
-        id: "fileFather"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-plus"
-      })), this.state.files && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "add-files",
-        id: "upload",
-        onClick: function onClick(e) {
-          return _this5.uploadFiles(e);
-        }
-      }, this.state.btn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-spinner"
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-upload"
-      })), this.state.checked_items.length !== 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "add-files add-files-right",
-        id: "fileFather",
-        onClick: this.deleteFiles
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-trash"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file",
-        name: "files[]",
-        id: "store",
-        className: "form-control-file",
-        multiple: true,
-        onChange: function onChange(e) {
-          return _this5.getFiles(e);
-        },
-        style: {
-          display: 'none'
-        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_11__["AddFilesButton"], {
+        getFiles: this.getFiles
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_12__["UploadFilesButton"], {
+        files: this.state.files,
+        onUpload: this.uploadFiles
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_9__["DeleteButton"], {
+        data: this.state.checked_items,
+        onDelete: this.deleteFiles
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_EmailButton__WEBPACK_IMPORTED_MODULE_10__["EmailButton"], {
+        data: this.state.checked_items,
+        onEmail: this.sendEmailFiles
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AccessButton__WEBPACK_IMPORTED_MODULE_13__["AccessButton"], {
+        data: this.state.checked_items,
+        onAccess: this.accessFiles
       }))))), this.state.processing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_ModalLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null), this.state.items && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListFiles__WEBPACK_IMPORTED_MODULE_3__["default"], {
         files: this.state.items,
         "delete": this.deleteFile,
+        download: this.downloadFile,
         onCheck: this.onCheckInput
       }) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_Loader__WEBPACK_IMPORTED_MODULE_4__["Loader"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationContainer"], null));
     }
@@ -70107,7 +70284,12 @@ function (_React$Component) {
         }, "Get access for..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "dropdown-item"
         }, "Send as Email..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "dropdown-item ",
+          className: "dropdown-item",
+          onClick: function onClick() {
+            return _this.props.download(file);
+          }
+        }, "Download"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "dropdown-item",
           onClick: function onClick() {
             return _this.props["delete"](file);
           }
@@ -70195,7 +70377,7 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      Object(_common_axios__WEBPACK_IMPORTED_MODULE_3__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].USER).then(function (res) {
+      Object(_common_axios__WEBPACK_IMPORTED_MODULE_3__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].USER_WITH_API).then(function (res) {
         _this2.setState({
           user: res.data
         });
@@ -70278,6 +70460,19 @@ function (_Component) {
         required: true,
         onChange: function onChange(e) {
           return _this4.onUserChange('email', e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "secret_key"
+      }, "Secret key"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "secret_key",
+        className: "form-control",
+        placeholder: "Your api secret key",
+        value: this.state.user.access_api[0].token,
+        onChange: function onChange(e) {
+          return _this4.onUserChange('secret_key', e);
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",

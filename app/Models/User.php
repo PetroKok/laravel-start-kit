@@ -47,6 +47,14 @@ class User extends Authenticatable
         return $this->hasMany(File::class);
     }
 
+    public function access_api(){
+        return $this->hasMany(AccessAPI::class)->where('revoked', 0);
+    }
+
+    public function createAccessAPI(){
+        return $this->hasMany(AccessAPI::class);
+    }
+
     /** END RELATIONSHIP **/
 
 

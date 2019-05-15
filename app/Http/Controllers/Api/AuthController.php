@@ -26,6 +26,10 @@ class AuthController extends Controller
 
         $request['password'] = Hash::make($request['password']);
         $user = User::create($request->toArray());
+        $user->createAccessAPI()->create([
+            'token' => uniqid('kok', true),
+            'revoked' => '0',
+        ]);
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['token' => $token, "user" => $user];

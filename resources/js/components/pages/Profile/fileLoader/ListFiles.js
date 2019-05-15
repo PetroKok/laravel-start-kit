@@ -28,7 +28,8 @@ export default class ListFiles extends React.Component {
                                     <div className="dropdown-menu cursor-pointer" aria-labelledby={key}>
                                         <li className="dropdown-item">Get access for...</li>
                                         <li className="dropdown-item">Send as Email...</li>
-                                        <li className="dropdown-item " onClick={() => this.props.delete(file)}>Delete</li>
+                                        <li className="dropdown-item" onClick={() => this.props.download(file)}>Download</li>
+                                        <li className="dropdown-item" onClick={() => this.props.delete(file)}>Delete</li>
                                     </div>
                                 </div>
                             </div>

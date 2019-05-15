@@ -28,6 +28,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
         // USER ROUTES (PROFILE)
         Route::post('/user','UserController@index');
+        Route::post('/user-with-api','UserController@api');
         Route::post('/user/update/{id}','UserController@update');
         Route::post('/user/logout', 'AuthController@logout')->name('logout');
 
@@ -37,6 +38,9 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/files/remove','FileUploadController@deleteFiles');
         Route::delete('/files/delete/{id}','FileUploadController@delete');
 
+        Route::post('/files/send_email', 'EmailController@send');
+        Route::post('/files/set_access', 'AccessController@access');
+        Route::post('/files/download', 'DownloadController@download');
 
 //        Route::get('/image/{slug}','ImageController@index');
 

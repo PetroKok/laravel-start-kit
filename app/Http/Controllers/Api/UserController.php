@@ -19,6 +19,11 @@ class UserController extends Controller
         return $request->user();
     }
 
+    public function api(Request $request)
+    {
+        return User::with('access_api')->find($request->user()->id);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -71,7 +76,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('access_api')->findOrFail($id);
 
         $user->update($request->all());
 
