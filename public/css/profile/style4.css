@@ -3,9 +3,33 @@
 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-body {
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(115, 134, 213, 0.45);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #7386D5;
+}
+
+
+html, body, #root {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    height: 100%!important;
+    margin: 0;
 }
 
 p {
@@ -413,4 +437,46 @@ div.loader img {
 
 .cursor-pointer > li {
     cursor: pointer;
+}
+
+.bgimg {
+    background-image: url('/img/forest.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 25px;
+}
+
+.topleft {
+    position: absolute;
+    top: 0;
+    left: 16px;
+}
+
+.topright {
+    position: absolute;
+    top: 0;
+    right: 16px;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+}
+
+.middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#hr {
+    margin: auto;
+    height: 1px;
+    background-color: #ffffff40;
 }

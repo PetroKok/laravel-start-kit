@@ -2,16 +2,19 @@ import React from 'react';
 import axios from "../../../common/axios";
 import api_urls from "../../../helpers/api_urls";
 import ListFiles from "./ListFiles";
-import {Loader} from "../../../common/Loader";
 import _ from 'lodash';
 import ModalLoader from "../../../common/ModalLoader";
+
+import {Loader} from "../../../common/Loader";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
 import {DeleteButton} from "../../../layouts/DeleteButton";
 import {EmailButton} from "../../../layouts/EmailButton";
 import {AddFilesButton} from "../../../layouts/AddFilesButton";
 import {UploadFilesButton} from "../../../layouts/UploadFilesButton";
 import {AccessButton} from "../../../layouts/AccessButton";
+
+
+import 'react-notifications/lib/notifications.css';
 
 export default class FileLoader extends React.Component {
 
@@ -36,22 +39,24 @@ export default class FileLoader extends React.Component {
 
 
     sendEmailFiles() {
+
         let files = this.state.checked_items;
+
+        this.setState({checked_items: []});
+        $('input[type="checkbox"]').prop('checked', false);
+
         let data = new FormData();
-        this.setState({processing: true});
+
         files.map((file) => {
             data.append('files[]', file);
         });
         axios().post(api_urls.FILES_SEND_EMAIL, data)
             .then(res => {
 
-                $('input[type="checkbox"]').prop('checked', false);
-
                 this.setState({processing: false, checked_items: []});
 
-                NotificationManager.success('Success message', 'Uploaded files', 5000);
+                NotificationManager.success('Success message', res.data.message, 7000);
 
-                console.log(res)
             })
             .catch(err => console.log(err))
     }

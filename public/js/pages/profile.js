@@ -69561,7 +69561,21 @@ function (_Component) {
   _createClass(Home, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "This is the main page of HOME");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bgimg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topleft"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Logo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topright"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/profile"
+      }, "Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "middle"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "COMING SOON"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        id: "hr"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "35 days left")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bottomleft"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Some text")));
     }
   }]);
 
@@ -69884,19 +69898,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/axios */ "./resources/js/components/common/axios.js");
 /* harmony import */ var _helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../helpers/api_urls */ "./resources/js/components/helpers/api_urls.js");
 /* harmony import */ var _ListFiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ListFiles */ "./resources/js/components/pages/Profile/fileLoader/ListFiles.js");
-/* harmony import */ var _common_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/Loader */ "./resources/js/components/common/Loader.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _common_ModalLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../common/ModalLoader */ "./resources/js/components/common/ModalLoader.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _common_ModalLoader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common/ModalLoader */ "./resources/js/components/common/ModalLoader.js");
+/* harmony import */ var _common_Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../common/Loader */ "./resources/js/components/common/Loader.js");
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notifications/lib/notifications.css */ "./node_modules/react-notifications/lib/notifications.css");
-/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../layouts/DeleteButton */ "./resources/js/components/layouts/DeleteButton.js");
-/* harmony import */ var _layouts_EmailButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../layouts/EmailButton */ "./resources/js/components/layouts/EmailButton.js");
-/* harmony import */ var _layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../layouts/AddFilesButton */ "./resources/js/components/layouts/AddFilesButton.js");
-/* harmony import */ var _layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../layouts/UploadFilesButton */ "./resources/js/components/layouts/UploadFilesButton.js");
-/* harmony import */ var _layouts_AccessButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../layouts/AccessButton */ "./resources/js/components/layouts/AccessButton.js");
+/* harmony import */ var _layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../layouts/DeleteButton */ "./resources/js/components/layouts/DeleteButton.js");
+/* harmony import */ var _layouts_EmailButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../layouts/EmailButton */ "./resources/js/components/layouts/EmailButton.js");
+/* harmony import */ var _layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../layouts/AddFilesButton */ "./resources/js/components/layouts/AddFilesButton.js");
+/* harmony import */ var _layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../layouts/UploadFilesButton */ "./resources/js/components/layouts/UploadFilesButton.js");
+/* harmony import */ var _layouts_AccessButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../layouts/AccessButton */ "./resources/js/components/layouts/AccessButton.js");
+/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-notifications/lib/notifications.css */ "./node_modules/react-notifications/lib/notifications.css");
+/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_13__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69965,23 +69979,21 @@ function (_React$Component) {
       var _this2 = this;
 
       var files = this.state.checked_items;
-      var data = new FormData();
       this.setState({
-        processing: true
+        checked_items: []
       });
+      $('input[type="checkbox"]').prop('checked', false);
+      var data = new FormData();
       files.map(function (file) {
         data.append('files[]', file);
       });
       Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_SEND_EMAIL, data).then(function (res) {
-        $('input[type="checkbox"]').prop('checked', false);
-
         _this2.setState({
           processing: false,
           checked_items: []
         });
 
-        react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', 'Uploaded files', 5000);
-        console.log(res);
+        react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationManager"].success('Success message', res.data.message, 7000);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -69997,7 +70009,7 @@ function (_React$Component) {
     value: function onCheckInput(arr) {
       var data = this.state.checked_items;
 
-      var n = lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(data, function (e) {
+      var n = lodash__WEBPACK_IMPORTED_MODULE_4___default.a.remove(data, function (e) {
         return e === arr;
       });
 
@@ -70034,7 +70046,7 @@ function (_React$Component) {
         });
         Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])().post(_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILES_DELETE, data).then(function (res) {
           file.map(function (f) {
-            lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this3.state.items, {
+            lodash__WEBPACK_IMPORTED_MODULE_4___default.a.remove(_this3.state.items, {
               id: f
             });
           });
@@ -70058,7 +70070,7 @@ function (_React$Component) {
           processing: true
         });
         Object(_common_axios__WEBPACK_IMPORTED_MODULE_1__["default"])()["delete"](_helpers_api_urls__WEBPACK_IMPORTED_MODULE_2__["default"].FILE_DELETE_ID + file.id).then(function (res) {
-          lodash__WEBPACK_IMPORTED_MODULE_5___default.a.remove(_this3.state.items, {
+          lodash__WEBPACK_IMPORTED_MODULE_4___default.a.remove(_this3.state.items, {
             id: file.id
           });
 
@@ -70123,7 +70135,7 @@ function (_React$Component) {
             $('input[type="checkbox"]').prop('checked', false);
 
             _this5.setState({
-              items: lodash__WEBPACK_IMPORTED_MODULE_5___default.a.unionBy(items, _this5.state.items, "id"),
+              items: lodash__WEBPACK_IMPORTED_MODULE_4___default.a.unionBy(items, _this5.state.items, "id"),
               btn: false,
               processing: false,
               files: null
@@ -70160,26 +70172,26 @@ function (_React$Component) {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group files color"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_11__["AddFilesButton"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AddFilesButton__WEBPACK_IMPORTED_MODULE_10__["AddFilesButton"], {
         getFiles: this.getFiles
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_12__["UploadFilesButton"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_UploadFilesButton__WEBPACK_IMPORTED_MODULE_11__["UploadFilesButton"], {
         files: this.state.files,
         onUpload: this.uploadFiles
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_9__["DeleteButton"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_DeleteButton__WEBPACK_IMPORTED_MODULE_8__["DeleteButton"], {
         data: this.state.checked_items,
         onDelete: this.deleteFiles
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_EmailButton__WEBPACK_IMPORTED_MODULE_10__["EmailButton"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_EmailButton__WEBPACK_IMPORTED_MODULE_9__["EmailButton"], {
         data: this.state.checked_items,
         onEmail: this.sendEmailFiles
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AccessButton__WEBPACK_IMPORTED_MODULE_13__["AccessButton"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AccessButton__WEBPACK_IMPORTED_MODULE_12__["AccessButton"], {
         data: this.state.checked_items,
         onAccess: this.accessFiles
-      }))))), this.state.processing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_ModalLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null), this.state.items && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListFiles__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))))), this.state.processing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_ModalLoader__WEBPACK_IMPORTED_MODULE_5__["default"], null), this.state.items && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListFiles__WEBPACK_IMPORTED_MODULE_3__["default"], {
         files: this.state.items,
         "delete": this.deleteFile,
         download: this.downloadFile,
         onCheck: this.onCheckInput
-      }) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_Loader__WEBPACK_IMPORTED_MODULE_4__["Loader"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationContainer"], null));
+      }) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_Loader__WEBPACK_IMPORTED_MODULE_6__["Loader"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_7__["NotificationContainer"], null));
     }
   }]);
 
@@ -70275,7 +70287,7 @@ function (_React$Component) {
           "aria-expanded": "false",
           "data-offset": "10,20"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-angle-double-right"
+          className: "fas fa-angle-double-left"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dropdown-menu cursor-pointer",
           "aria-labelledby": key

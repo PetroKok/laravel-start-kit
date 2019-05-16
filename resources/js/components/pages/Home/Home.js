@@ -8,8 +8,21 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                This is the main page of HOME
+            <div className="bgimg">
+                <div className="topleft">
+                    <p>Logo</p>
+                </div>
+                <div className="topright">
+                    <a href="/profile">Profile</a>
+                </div>
+                <div className="middle">
+                    <h1>COMING SOON</h1>
+                    <hr id="hr"/>
+                    <p>35 days left</p>
+                </div>
+                <div className="bottomleft">
+                    <p>Some text</p>
+                </div>
             </div>
         );
     }

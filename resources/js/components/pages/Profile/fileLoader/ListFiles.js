@@ -23,7 +23,7 @@ export default class ListFiles extends React.Component {
                                     <button type="button" className="btn btn-padding-unset btn-success" id={key} data-toggle="dropdown"
                                             aria-haspopup="true"
                                             aria-expanded="false" data-offset="10,20">
-                                        <i className="fas fa-angle-double-right"/>
+                                        <i className="fas fa-angle-double-left"/>
                                     </button>
                                     <div className="dropdown-menu cursor-pointer" aria-labelledby={key}>
                                         <li className="dropdown-item">Get access for...</li>
