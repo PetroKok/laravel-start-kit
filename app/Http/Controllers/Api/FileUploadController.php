@@ -25,6 +25,7 @@ class FileUploadController extends Controller
 
     public function store(FileStoreRequest $request)
     {
+//        dd($request->all());
         $files = $this->model->store($request->all());
         return response(['status' => 200, 'message' => ['type' => 'success', 'message' => 'Added!'], 'files' => $files]);
     }
