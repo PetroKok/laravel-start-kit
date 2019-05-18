@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'jwt-auth' => \App\Http\Middleware\jwtMiddleware::class,
         'api-header' => \App\Http\Middleware\API::class,
         'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
+        'access.remote' => \App\Http\Middleware\AccessRemoteMiddleware::class,
         ];
 
     /**
